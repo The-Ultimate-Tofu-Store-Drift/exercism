@@ -9,7 +9,6 @@ def hey(what):
     n_what = what
     n_what = n_what.replace(",", "")
     n_what = n_what.replace(" ", "")
-    # n_what = " ".join(n_what)
 
     for i in n_what:
         if i in n_what:
