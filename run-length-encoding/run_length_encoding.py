@@ -5,36 +5,31 @@ def decode():
 
 def encode(string):
 
-    encoded = {}
-    counter = 1
+    coding = {}
     container = []
-    single = []
-
-    # for i in range(len(string)):
-    #     for j in range(len(string) - 1 - i):
-    #         if string[j] == string[j + 1]:
+    single_letters = []
 
     for i in string:
-        if i in encoded:
-            encoded[i] += 1
+        if i in coding:
+            coding[i] += 1
         else:
-            encoded[i] = 1
+            coding[i] = 1
 
-    print("encoded:", encoded)
+    print("coding:", coding)
 
     for i in string:
-        if i not in single:
-            single.append(i)
+        if i not in single_letters:
+            single_letters.append(i)
 
-    print("single: ", single)
+    print("single_letters: ", single_letters)
 
-    for i in single:
-        container.append(str(encoded[i]) + i)
+    for i in single_letters:
+        container.append(str(coding[i]) + i)
 
     print("container: ", container)
 
-    new = "".join(container)
-    print(new)
+    encoded_string = "".join(container)
+    print(encoded_string)
 
 
 print(encode("AABBBCCCC"))
