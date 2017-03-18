@@ -1,47 +1,39 @@
 
 def hey(what):
 
+    # This replaces the '\t'. Yeah, I know.
     what = what.replace("\t", "")
+
+    # This block is necessary for checking.
     special = [".", "!", "?", "%", "*", "^", "(", "@", "#", "$", "1", "2", "3", " ", ",", ""]
-    numbers = "123"
+    numbers = ["1", "2", "3", "4"]
+    empty = ["", " ", "    "]
+
+    # This checks if the string contains characters from the variable 'empty'.
+    if what[:] in empty:
+        return "Fine. Be that way!"
+
+    # It checks if the characters are not in 'special'. If so, it appends them to 'new_list'.
     new_list = []
-
-    n_what = what
-    n_what = n_what.replace(",", "")
-    n_what = n_what.replace(" ", "")
-
-    for i in n_what:
-        if i in n_what:
-            n_what.replace(i, "")
-            if len(n_what) == 0:
-                return "Whatever."
-
-
     l = list(what)
     for i in l:
         if i not in special:
             new_list.append(i)
 
+    # It just joins the content of 'new_list' to a string.
     new_list = "".join(new_list)
 
-    print("what: ", what)
-    print("new_list: ", new_list)
-    print()
+    # If the last character is ' ' it replaces all of them with ''.
+    if what[-1] == " ":
+        what = what.replace(" ", "")
 
-    if new_list[:] == new_list[:].upper() and new_list[:] != "":
+    # This one checks if the character in 'new_list' are all uppercase-letters and are not in 'numbers'
+    if new_list[:] == new_list[:].upper() and new_list[:] != "" and new_list not in numbers:
         return "Whoa, chill out!"
 
-print(hey('1, 2, 3'))
+    # Checks if the last character is '?'.
+    elif what[-1] == "?":
+        return "Sure."
 
-# 'ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!'
-# 'ÜMLäÜTS!'
-# 'Ending with ? means a question.'
-# "Wait! Hang on. Are you going to be OK?"
-# '    \t'
-# '         hmmmmmmm...'
-# 'What if we end with whitespace?   '
-# 'This is a statement with trailing whitespace   '
-# ''
-# 4?
-# '1, 2, 3'
-# '1, 2, 3 GO!'
+    else:
+        return "Whatever."
