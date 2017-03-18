@@ -12,17 +12,21 @@ def encode(string):
         if i in coding:
             coding[i] += 1
         else:
+
             for key, value in coding.items():
                 if value == 1:
                     coding[key] = "!"
+
             for key, value in coding.items():
                 container.append(str(value) + str(key))
             coding.clear()
             coding[i] = 1
     else:
+
         for key, value in coding.items():
             if value == 1:
                 coding[key] = "!"
+
         for key, value in coding.items():
             container.append(str(value) + str(key))
         coding.clear()
@@ -32,6 +36,7 @@ def encode(string):
 
     encoded_string = "".join(container)
     encoded_string = encoded_string.replace("!", "")
+
     return encoded_string
 
 
