@@ -1,7 +1,38 @@
 
-def decode():
-    pass
 
+def decode(string):
+
+    numbers = []
+    letters = []
+    dict = {}
+    ns = []
+    sl = 0
+
+    if string == "":
+        return ""
+
+    for i in string:
+        if i.isnumeric():
+            numbers.append(int(i))
+            if len(numbers) > 1:
+                sl = int(str(numbers[0]) + str(numbers[1]))
+                numbers.clear()
+                numbers.append(sl)
+        else:
+            try:
+                dict[i] = numbers[0]
+                numbers.clear()
+                for key, value in dict.items():
+                    ns.append(key * value)
+                dict.clear()
+            except IndexError:
+                dict[i] = 1
+                for key, value in dict.items():
+                    ns.append(key * value)
+                dict.clear()
+
+    ns = "".join(ns)
+    return ns
 
 def encode(string):
     # One dictionary called 'coding' to temporally store the count of letters
