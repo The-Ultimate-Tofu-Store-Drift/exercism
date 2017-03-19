@@ -3,10 +3,8 @@
 def decode(string):
 
     numbers = []
-    letters = []
-    dict = {}
-    ns = []
-    sl = 0
+    temp_dict = {}
+    decoded_string = []
 
     if string == "":
         return ""
@@ -15,24 +13,25 @@ def decode(string):
         if i.isnumeric():
             numbers.append(int(i))
             if len(numbers) > 1:
-                sl = int(str(numbers[0]) + str(numbers[1]))
+                comb_string = int(str(numbers[0]) + str(numbers[1]))
                 numbers.clear()
-                numbers.append(sl)
+                numbers.append(comb_string)
         else:
             try:
-                dict[i] = numbers[0]
+                temp_dict[i] = numbers[0]
                 numbers.clear()
-                for key, value in dict.items():
-                    ns.append(key * value)
-                dict.clear()
+                for key, value in temp_dict.items():
+                    decoded_string.append(key * value)
+                temp_dict.clear()
             except IndexError:
-                dict[i] = 1
-                for key, value in dict.items():
-                    ns.append(key * value)
-                dict.clear()
+                temp_dict[i] = 1
+                for key, value in temp_dict.items():
+                    decoded_string.append(key * value)
+                temp_dict.clear()
 
-    ns = "".join(ns)
-    return ns
+    decoded_string = "".join(decoded_string)
+    return decoded_string
+
 
 def encode(string):
     # One dictionary called 'coding' to temporally store the count of letters
