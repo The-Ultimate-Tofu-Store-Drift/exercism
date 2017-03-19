@@ -2,34 +2,53 @@
 
 def decode(string):
 
+    # for storing data
     numbers = []
     temp_dict = {}
     decoded_string = []
 
+    # simply returns 'nothing' if the given argument is 'nothing'.
     if string == "":
         return ""
 
     for i in string:
-        if i.isnumeric():
-            numbers.append(int(i))
+
+        if i.isnumeric():           # if i is a number
+            numbers.append(int(i))  # it will be converted to a 'int' and stored in 'numbers'
+
+            # if two numbers appear in a row, they will be merged and stored in 'numbers'
+            # it is necessary in case something is given like this: 12W24B
             if len(numbers) > 1:
                 comb_string = int(str(numbers[0]) + str(numbers[1]))
                 numbers.clear()
                 numbers.append(comb_string)
+
         else:
+            # Tries to combine 'i' and the int stored in 'numbers'
+            # Afterwards all entry in 'numbers' will be removed
             try:
                 temp_dict[i] = numbers[0]
                 numbers.clear()
+
+                # This is an important step because otherwise the key/value pairs will be overwritten by
+                # the same letter e.g. 2AB3A != dict= {'A' : 2, 'B' : 1, 'A' : 3}; It's dict= {'A' : 3, 'B' : 1}
+                # In the dictionary is always only one key/value and will be added the list 'decoded_string'.
                 for key, value in temp_dict.items():
-                    decoded_string.append(key * value)
-                temp_dict.clear()
+                    decoded_string.append(key * value)  # e.g. {'A' : 3} > AAA
+
+                temp_dict.clear()   # removes all entries
+
+            # If a letter is followed by another letter, there is no value for the key in 'number'
+            # therefore a 'IndexError' is raised. The value '1' is given to the key.
             except IndexError:
                 temp_dict[i] = 1
+
                 for key, value in temp_dict.items():
                     decoded_string.append(key * value)
+
                 temp_dict.clear()
 
-    decoded_string = "".join(decoded_string)
+    decoded_string = "".join(decoded_string)    # 'decoded_string' is a list. But we need a string
     return decoded_string
 
 
