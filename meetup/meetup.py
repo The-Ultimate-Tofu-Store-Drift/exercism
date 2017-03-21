@@ -15,6 +15,10 @@ def meetup_day(year, month, weekday, spec):
         "Sunday": 6
     }
 
+    spec_list = {
+        "teenth":1
+    }
+
     cal = {}
 
     # if spec == "teenth":
@@ -27,8 +31,7 @@ def meetup_day(year, month, weekday, spec):
                 continue
             return j
 
-
-    t = []
+    t = [i for i in range(0, 7)] * 6
     filler = [i for i in range(-10, 0)]
 
     b = calendar.monthcalendar(year, month)
@@ -40,10 +43,20 @@ def meetup_day(year, month, weekday, spec):
                 b[i][find_index(j)] = filler[0]
                 del filler[0]
 
+    for i in range(len(b)):
+        for j in b[i]:
+            cal[j] = t[0]
+            del t[0]
+
+    for i in cal:
+        if cal[i] == days[weekday] and i in teenth:
+            print(year, month, i)
+
+
     a = date.isocalendar(date.today())
     print(teenth)
     print(cal)
-    print(t)
+    print("t ", t)
     print(filler)
 
     print("find ", find_index(30))
