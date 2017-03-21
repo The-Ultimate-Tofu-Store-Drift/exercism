@@ -15,19 +15,38 @@ def meetup_day(year, month, weekday, spec):
         "Sunday": 6
     }
 
+    cal = {}
+
     # if spec == "teenth":
 
+    def find_index(sus):
+        for i, lst in enumerate(b):
+            try:
+                j = lst.index(sus)
+            except ValueError:
+                continue
+            return j
+
+
     t = []
+    filler = [i for i in range(-10, 0)]
 
     b = calendar.monthcalendar(year, month)
+    print(b)
 
     for i in range(len(b)):
         for j in b[i]:
-            print(j)
+            if j == 0:
+                b[i][find_index(j)] = filler[0]
+                del filler[0]
 
     a = date.isocalendar(date.today())
     print(teenth)
+    print(cal)
     print(t)
+    print(filler)
+
+    print("find ", find_index(30))
 
     return b
 
