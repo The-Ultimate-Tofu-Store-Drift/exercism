@@ -4,7 +4,7 @@ import calendar
 
 def meetup_day(year, month, weekday, spec):
 
-    teenth = [i for i in range(13, 18)]
+    teenth = [i for i in range(13, 19)]
     days = {
         "Monday": 0,
         "Tuesday": 1,
@@ -16,53 +16,78 @@ def meetup_day(year, month, weekday, spec):
     }
 
     spec_list = {
-        "teenth":1
+        "1st": 0,
+        "2nd": 1,
+        "3rd": 2,
+        "4th": 3,
+        "5th": 4,
+        "last": 4
     }
 
-    cal = {}
-
-    # if spec == "teenth":
-
     def find_index(sus):
-        for i, lst in enumerate(b):
+        for i, lst in enumerate(grouped_days):
             try:
                 j = lst.index(sus)
             except ValueError:
                 continue
             return j
 
-    t = [i for i in range(0, 7)] * 6
-    filler = [i for i in range(-10, 0)]
 
     b = calendar.monthcalendar(year, month)
-    print(b)
 
-    for i in range(len(b)):
-        for j in b[i]:
+    grouped_days = [[], [], [], [], [], [], []]
+
+    for j in range(7):
+        for i in range(len(b)):
+            grouped_days[j].append(b[i][j])
+
+    print("grouped_days: ", grouped_days)
+
+    for i in range(len(grouped_days)):
+        for j in grouped_days[i]:
             if j == 0:
-                b[i][find_index(j)] = filler[0]
-                del filler[0]
+                del grouped_days[i][find_index(j)]
 
-    for i in range(len(b)):
-        for j in b[i]:
-            cal[j] = t[0]
-            del t[0]
+    print("deleted: ", grouped_days)
 
-    for i in cal:
-        if cal[i] == days[weekday] and i in teenth:
-            print(year, month, i)
+    if spec == "teenth":
+        for i in grouped_days[days[weekday]]:
+            if i in teenth:
+                ex_date = i
+    else:
+        ex_date = grouped_days[days[weekday]][spec_list[spec]]
 
+    print(ex_date)
+
+    # for i in range(len(b)):
+    #     for j in b[i]:
+    #         cal[j] = t[0]
+    #         del t[0]
+
+    # for i in range(len(b)):
+    #     for j in b[i]:
+    #         if j > 0:
+    #             b_c.append([b[i][find_index(j)]])
+
+    # for h in range(8):
+    #     for i in range(len(b)):
+    #         for j in b[i]:
+    #             if j < 1:
+    #                 del b[i][find_index(j)]
+
+    # for i in cal:
+    #     if cal[i] == days[weekday] and i in b[spec_list[spec]]:
+    #         print(year, month, i)
+    #         break
+    #     elif cal[i] == days[weekday] and i in b[spec_list[spec] + 1]:
+    #         print(year, month, i)
+    #         break
 
     a = date.isocalendar(date.today())
-    print(teenth)
-    print(cal)
-    print("t ", t)
-    print(filler)
 
-    print("find ", find_index(30))
+    print("b: ", b)
 
-    return b
-
+    return "{0}, {1}, {2}".format(year, month, ex_date)
 
 print(meetup_day(2013, 5, 'Monday', 'teenth'))  # 2013, 5, 13
 
