@@ -25,6 +25,7 @@ def meetup_day(year, month, weekday, spec):
         "last": -1
     }
 
+    # thanks to stackoverflow
     def find_index(sus):
         for i, lst in enumerate(grouped_days):
             try:
@@ -37,20 +38,24 @@ def meetup_day(year, month, weekday, spec):
 
     grouped_days = [[], [], [], [], [], [], []]
 
+    # groups all monday in a list, groups all tuesday in a list and so on
     for j in range(7):
         for i in range(len(b)):
             grouped_days[j].append(b[i][j])
 
+    # a '0' stands for a day outside of the requested month, they must be deleted
     for i in range(len(grouped_days)):
         for j in grouped_days[i]:
             if j == 0:
                 del grouped_days[i][find_index(j)]
 
+    # checks if the argument is this weird 'teenth' thing and selects
+    # the day with help from the 'teenth' list or the 'spec' list
     if spec == "teenth":
         for i in grouped_days[days[weekday]]:
             if i in teenth:
-                ex_date = i
+                extracted_day = i
     else:
-        ex_date = grouped_days[days[weekday]][spec_list[spec]]
+        extracted_day = grouped_days[days[weekday]][spec_list[spec]]
 
-    return date(year, month, ex_date)
+    return date(year, month, extracted_day)
