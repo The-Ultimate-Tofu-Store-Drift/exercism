@@ -9,7 +9,7 @@ def detect_anagrams(word, list_with_words):
         for i in range(len(list_with_words)):
             if len(word) == len(list_with_words[i]):
                 for letter in list_with_words[i]:
-                    if list_with_words.count(letter).lower == word.lower.count(letter):
+                    if list_with_words[i].lower.count(letter) == word.lower.count(letter):
                         counter += 1
                     else:
                         break
