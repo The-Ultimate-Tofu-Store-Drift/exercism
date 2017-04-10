@@ -36,5 +36,4 @@ class Allergies(object):
         return self.lst_results[::-1]
 
 if __name__ == "__main__":
-    mark = Allergies(509)
-    print(mark.lst())
+    print(Allergies(2).lst())
