@@ -1,3 +1,4 @@
+# inspired by j2towers
 
 class Allergies(object):
 
