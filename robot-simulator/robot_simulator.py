@@ -9,14 +9,7 @@ class Robot(object):
 
     def __init__(self, direction=NORTH, x_position=0, y_position=0):
         self.coordinates = (x_position, y_position)
-        self.bearing = direction    # self.bearings[direction]
-
-    bearings = {
-        0: "NORTH",
-        1: "EAST",
-        2: "SOUTH",
-        3: "WEST"
-    }
+        self.bearing = direction
 
     def turn_right(self):
         self.bearing += 1
@@ -43,6 +36,17 @@ class Robot(object):
 
         elif self.bearing == 3:
             self.coordinates = (self.coordinates[0] - 1, self.coordinates[1])
+
+    def simulate(self, string):
+
+        for letter in string:
+
+            if letter == "A":
+                self.advance()
+            elif letter == "L":
+                self.turn_left()
+            elif letter == "R":
+                self.turn_right()
 
 
 if __name__ == "__main__":
