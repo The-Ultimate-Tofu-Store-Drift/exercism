@@ -1,0 +1,42 @@
+NORTH = 0
+EAST = 1
+SOUTH = 2
+WEST = 3
+
+
+class Robot(object):
+    def __init__(self, direction = NORTH, xpos = 0, ypos = 0):
+        self.bearing = direction
+        self.coordinates = (xpos, ypos)
+
+    def advance(self):
+        if self.bearing == NORTH:
+            self.coordinates = (self.coordinates[0], self.coordinates[1] + 1)
+        elif self.bearing == EAST:
+            self.coordinates = (self.coordinates[0] + 1, self.coordinates[1])
+        elif self.bearing == SOUTH:
+            self.coordinates = (self.coordinates[0], self.coordinates[1] - 1)
+        elif self.bearing == WEST:
+            self.coordinates = (self.coordinates[0] - 1, self.coordinates[1])
+
+    def turn_right(self):
+        self.bearing += 1
+        if self.bearing > 3:
+            self.bearing = 0
+
+    def turn_left(self):
+        self.bearing -= 1
+        if self.bearing < 0:
+            self.bearing = 3
+
+    def simulate(self, stringin):
+        for dir in stringin:
+            self.dirupdate(dir)
+
+    def dirupdate(self, simchar):
+        if simchar == "A":
+            self.advance()
+        elif simchar == "L":
+            self.turn_left()
+        elif simchar == "R":
+            self.turn_right()
