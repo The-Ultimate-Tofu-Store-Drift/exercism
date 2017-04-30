@@ -47,9 +47,3 @@ class Robot(object):
                 self.turn_left()
             elif letter == "R":
                 self.turn_right()
-
-
-if __name__ == "__main__":
-    robot = Robot()
-    robot.advance()
-    print(robot.coordinates, robot.bearing)
