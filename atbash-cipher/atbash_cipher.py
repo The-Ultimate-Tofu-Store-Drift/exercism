@@ -48,6 +48,3 @@ def decode(string_input):
             temp.append(string_input[i])
 
     return "".join(temp)
-
-if __name__ == "__main__":
-    print(decode(input("string: ")))
