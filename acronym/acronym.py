@@ -16,11 +16,11 @@ def abbreviate(phrase):
 
     # if a word consists entirely of uppercase letters, it will be replaced by the
     # first letter of this word
-    for word in phrase:
-        if word.isupper():
-            temporary_special.append(word[0])
-            del phrase[phrase.index(word)]
-            phrase.insert(0, temporary_special[0])
+    for word in range(len(phrase)):
+        if phrase[word].isupper():
+            temporary_special.append(phrase[word][0])
+            del phrase[word]
+            phrase.insert(word, temporary_special[0])
 
     # joins the list to a string again
     phrase = " ".join(phrase)
