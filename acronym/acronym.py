@@ -21,6 +21,7 @@ def abbreviate(phrase):
             temporary_special.append(phrase[word][0])
             del phrase[word]
             phrase.insert(word, temporary_special[0])
+            temporary_special.clear()
 
     # joins the list to a string again
     phrase = " ".join(phrase)
